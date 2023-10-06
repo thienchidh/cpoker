@@ -49,13 +49,26 @@ func eval(writer http.ResponseWriter, request *http.Request) {
 	log.Printf("%v", h.String())
 
 	// h string to json
-	// TODO: card json
+
+	obj := map[string][]string{
+		"front":  convertHand3ToListStr(h.Front),
+		"middle": convertHand5ToListStr(h.Middle),
+		"back":   convertHand5ToListStr(h.Back),
+	}
 
 	// respond with result
-	_ = json.NewEncoder(writer).Encode(h)
+	_ = json.NewEncoder(writer).Encode(obj)
 }
 
-func convertHandToListStr(h [5]poker.Card) []string {
+func convertHand5ToListStr(h [5]poker.Card) []string {
+	var list []string
+	for _, c := range h {
+		list = append(list, c.String())
+	}
+	return list
+}
+
+func convertHand3ToListStr(h [3]poker.Card) []string {
 	var list []string
 	for _, c := range h {
 		list = append(list, c.String())
