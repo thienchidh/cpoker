@@ -1,6 +1,7 @@
 package cpoker
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"runtime"
@@ -18,10 +19,23 @@ func BenchmarkPlayProd(b *testing.B) {
 			j := rand.Intn(52-i) + i
 			cards[i], cards[j] = cards[j], cards[i]
 		}
+		// debug cards
+		printCards(cards[:13])
+
 		h, max := Play(cards[:13], he)
-		//fmt.Printf("%v: %#v\n", h, max)
+		fmt.Printf("%v: %#v\n", h, max)
 		_, _ = h, max
 	}
+}
+
+func printCards(cards []poker.Card) {
+	// map cards to strings
+	strs := make([]string, len(cards))
+	for i, c := range cards {
+		strs[i] = c.String()
+	}
+	str, _ := json.Marshal(strs)
+	fmt.Println(string(str))
 }
 
 func BenchmarkPlayRollout(b *testing.B) {

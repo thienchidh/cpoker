@@ -6,9 +6,11 @@
 // in the coefficients.data file in this directory is as follows:
 //
 // cards := <construct 13 card slice using github.com/paulhankin/poker>
-// if hero, err = cpoker.LoadSampledEvaluator(*fromFile); err != nil {
-//     log.Fatalf("failed to load evaluator: %s", err)
-// }
+//
+//	if hero, err = cpoker.LoadSampledEvaluator(*fromFile); err != nil {
+//	    log.Fatalf("failed to load evaluator: %s", err)
+//	}
+//
 // h, _ : =cpoker.Play(cards, hero)
 // fmt.Println(h) // Shows the played front, middle and back hands.
 package cpoker
